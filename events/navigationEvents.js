@@ -2,7 +2,7 @@ import { signOut } from '../utils/auth';
 import { getBooks, booksOnSale } from '../api/bookData';
 import { showBooks } from '../pages/books';
 import { showAuthors } from '../pages/authors';
-import { getAuthors } from '../api/authorData';
+import { getAuthors, favoriteAuthors } from '../api/authorData';
 
 // navigation events
 const navigationEvents = () => {
@@ -29,6 +29,11 @@ const navigationEvents = () => {
   // 3. If the array is empty because there are no authors, make sure to use the emptyAuthor function
   document.querySelector('#authors').addEventListener('click', () => {
     console.warn('CLICKED AUTHORS');
+  });
+
+  // Favorite Author Filter
+  document.querySelector('#favorite-authors').addEventListener('click', () => {
+    favoriteAuthors().then(showAuthors);
   });
 
   // STRETCH: SEARCH
