@@ -6,8 +6,9 @@ import { showAuthors } from '../pages/authors';
 import {
   getAuthors, getSingleAuthor, deleteSingleAuthor
 } from '../api/authorData';
-import getBookDetails from '../api/mergedData';
+import { getBookDetails, getAuthorDetails } from '../api/mergedData';
 import viewBook from '../pages/viewBook';
+import viewAuthor from '../pages/viewAuthor';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -73,6 +74,12 @@ const domEvents = () => {
       const [, firebaseKey] = e.target.id.split('--');
 
       getSingleAuthor(firebaseKey).then((authorObj) => addAuthorForm(authorObj));
+    }
+
+    // view author button
+    if (e.target.id.includes('view-author-btn')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      getAuthorDetails(firebaseKey).then(viewAuthor);
     }
   });
 };
