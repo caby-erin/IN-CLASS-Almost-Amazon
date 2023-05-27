@@ -6,6 +6,8 @@ import { showAuthors } from '../pages/authors';
 import {
   getAuthors, getSingleAuthor, deleteSingleAuthor
 } from '../api/authorData';
+import getBookDetails from '../api/mergedData';
+import viewBook from '../pages/viewBook';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -42,6 +44,9 @@ const domEvents = () => {
     if (e.target.id.includes('view-book-btn')) {
       console.warn('VIEW BOOK', e.target.id);
       console.warn(e.target.id.split('--'));
+
+      const [, firebaseKey] = e.target.id.split('--');
+      getBookDetails(firebaseKey).then(viewBook);
     }
 
     // FIXME: ADD CLICK EVENT FOR DELETING AN AUTHOR
