@@ -4,9 +4,11 @@ import addBookForm from '../components/forms/addBookForm';
 import addAuthorForm from '../components/forms/addAuthorForm';
 import { showAuthors } from '../pages/authors';
 import {
-  getAuthors, getSingleAuthor, deleteSingleAuthor
+  getAuthors, getSingleAuthor
 } from '../api/authorData';
-import { getBookDetails, getAuthorDetails } from '../api/mergedData';
+import {
+  getBookDetails, getAuthorDetails, deleteAuthorBooksRelationship
+} from '../api/mergedData';
 import viewBook from '../pages/viewBook';
 import viewAuthor from '../pages/viewAuthor';
 
@@ -58,7 +60,7 @@ const domEvents = () => {
         console.warn(e.target.id.split('--'));
         const [, firebaseKey] = e.target.id.split('--');
 
-        deleteSingleAuthor(firebaseKey).then(() => {
+        deleteAuthorBooksRelationship(firebaseKey).then(() => {
           getAuthors().then(showAuthors);
         });
       }
